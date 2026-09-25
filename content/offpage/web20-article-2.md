@@ -2,7 +2,7 @@
 
 > Suggested title: "7 Rainy-Day Printable Activities for Ages 3–6 (No Prep Needed)"
 > Angle: activity roundup for parents (different intent from guide D2's daily
-> routine — no cannibalisation). One natural link to littlelearners.store.
+> routine — no cannibalisation). One natural link to littlelearners.site.
 > 800–1,200 words. UK English. Active voice. Skimmable: numbered list, bold
 > lead-ins, short paragraphs.
 
@@ -62,7 +62,7 @@ seriously.
 ## Where to get the pages
 
 Every activity above needs just one printed page. If you don't have any to
-hand, [LittleLearners](https://littlelearners.store/) sells buy-once printable
+hand, [LittleLearners](https://littlelearners.site/) sells buy-once printable
 packs for ages 3–6 — alphabet tracing, phonics, numbers, scissor skills and
 more, all matched to the UK early-years curriculum. One payment, print forever,
 no subscription. There's also a free sample you can print right now, no signup

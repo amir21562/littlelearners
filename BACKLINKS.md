@@ -1,6 +1,6 @@
 # LittleLearners — Off-Page SEO & Backlink Playbook
 
-**Site:** littlelearners.store — UK kids' educational printables (buy-once PDFs, ages 3–6, EYFS/KS1 aligned)
+**Site:** littlelearners.site — UK kids' educational printables (buy-once PDFs, ages 3–6, EYFS/KS1 aligned)
 **Positioning line for all outreach:** *"Buy once. Yours forever. No subscription."* — the buy-once alternative to worksheet subscriptions.
 **Rules:** 100% white-hat. No link farms, no PBNs, no paid links without `rel="sponsored"`, no automated spam, no spun content. Google's spam policies (confirmed in the May 2026 update round) treat **excessive reciprocal link exchanges** as link spam — so we do NOT run link-swap schemes. What we do instead is in §7.
 
@@ -8,11 +8,11 @@
 
 ## 1. Social media profiles
 
-Handle target: **@littlelearners** everywhere. It may be taken on some platforms (the name is used by several sellers — flagged during competitor research). Fallbacks in order: `@littlelearnersuk` → `@littlelearners.store`. Pick ONE fallback and use it consistently wherever the first choice is unavailable.
+Handle target: **@littlelearners** everywhere. It may be taken on some platforms (the name is used by several sellers — flagged during competitor research). Fallbacks in order: `@littlelearnersuk` → `@littlelearners.site`. Pick ONE fallback and use it consistently wherever the first choice is unavailable.
 
 Every profile needs:
 - Logo (the store logo.webp) as avatar
-- Bio: *"Printable worksheets for ages 3–6 · UK EYFS & KS1 aligned · Buy once, yours forever — no subscription"* + link to https://littlelearners.store/
+- Bio: *"Printable worksheets for ages 3–6 · UK EYFS & KS1 aligned · Buy once, yours forever — no subscription"* + link to https://littlelearners.site/
 - First 3–5 posts live before any outreach (so profile links look legitimate)
 
 Priority order (do in this sequence):
@@ -36,8 +36,8 @@ For a digital-goods business, citations are about **trust signals and NAP consis
 
 **NAP (use EXACTLY this everywhere):**
 - Name: LittleLearners
-- Website: https://littlelearners.store/
-- Email: hello@littlelearners.store
+- Website: https://littlelearners.site/
+- Email: hello@littlelearners.site
 - Address: list as "Online only — United Kingdom" (never invent a fake street address; several directories penalise/removes fake addresses)
 - Phone: only if you have a real business number — otherwise leave blank consistently
 
@@ -76,7 +76,7 @@ For a digital-goods business, citations are about **trust signals and NAP consis
 | **Blogger** (littlelearners.blogspot.com) | 2–3 posts; profile links home |
 | **Substack** newsletter | Repurpose guides as newsletter issues; archive pages get indexed |
 
-**Content rules for Web 2.0:** unique articles (never copy from littlelearners.store or from each other), 800–1,200 words, genuinely useful, **different angles from the 12 guides** in TOPICAL_AUTHORITY.md (one intent = one article — no cannibalisation). Link back with natural anchors: "LittleLearners", "our printable packs", or the article-relevant guide URL once it exists.
+**Content rules for Web 2.0:** unique articles (never copy from littlelearners.site or from each other), 800–1,200 words, genuinely useful, **different angles from the 12 guides** in TOPICAL_AUTHORITY.md (one intent = one article — no cannibalisation). Link back with natural anchors: "LittleLearners", "our printable packs", or the article-relevant guide URL once it exists.
 
 **Two ready-to-publish drafts are in `content/offpage/`:**
 - `web20-article-1.md` — *"I Cancelled Our Worksheet Subscription. Here's What We Do Instead."* (the buy-once angle — Medium)
@@ -184,7 +184,7 @@ Would any of these work for [Blog Name]?
 
 Thanks,
 [Your name]
-LittleLearners — https://littlelearners.store/
+LittleLearners — https://littlelearners.site/
 ```
 
 **Rules:** one follow-up max, 7 days later. Personalise the first two lines every time (mention a real article). Never send the same pitch twice. Track everything in the link tracker (§10).
@@ -216,7 +216,7 @@ Find existing resource roundups and ask for **inclusion on merit**:
 **Google's spam policies list "excessive link exchanges" as link spam** (confirmed again in the May 2026 policy roundup; John Mueller has said the same for years). Systematic "you link me, I link you" schemes risk manual penalties. **We do not do reciprocal link schemes. Period.**
 
 **The compliant alternative: the /resources partner page.**
-- Build `/resources/` on littlelearners.store: a genuinely useful, curated page — "Helpful resources for UK parents of 3–6 year olds" (draft content in `content/offpage/resources-page.md`).
+- Build `/resources/` on littlelearners.site: a genuinely useful, curated page — "Helpful resources for UK parents of 3–6 year olds" (draft content in `content/offpage/resources-page.md`).
 - List ~12 resources across categories (official curriculum info, free learning sites, parenting support) with honest 2-line descriptions. Include competitors' free sections where genuinely useful — that honesty is what makes the page link-worthy.
 - **Outreach:** email each listed site once: "We've featured [Site] in our resources roundup for UK parents — thought you'd like to know." No ask for a link. A meaningful fraction link back or share it voluntarily.
 - Also submit the /resources page (and the free sample) to 3–4 "free printables" roundup curators.
@@ -261,7 +261,7 @@ I can keep it practical and story-led — no sales pitch, I promise.
 Happy to work around your schedule, 25–30 min.
 
 Thanks for considering it,
-[Your name] · LittleLearners (littlelearners.store)
+[Your name] · LittleLearners (littlelearners.site)
 ```
 
 Show-notes pages almost always link the guest's site. Target: 1 podcast appearance in 90 days (pitch 5–7 shows).

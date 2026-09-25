@@ -2,9 +2,9 @@
 
 ## 1. Google Search Console setup (one-time)
 
-1. Add the property `https://littlelearners.store/` (domain property preferred).
+1. Add the property `https://littlelearners.site/` (domain property preferred).
 2. Verify ownership (DNS TXT record via the Hostinger hPanel DNS editor).
-3. Submit `https://littlelearners.store/sitemap.xml` under Sitemaps.
+3. Submit `https://littlelearners.site/sitemap.xml` under Sitemaps.
 4. Under Settings → Crawl stats, confirm Googlebot is fetching the site.
 5. Use **URL Inspection** on each of the four guide URLs and click
    **Request indexing**:

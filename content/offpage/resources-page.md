@@ -3,7 +3,7 @@
 > Page purpose: a genuinely useful curated page for parents. Honest descriptions,
 > including competitors' free sections where useful — that honesty is what makes
 > the page link-worthy. Outreach: email each listed site once ("we featured you"),
-> no link ask. Build at littlelearners.store/resources/.
+> no link ask. Build at littlelearners.site/resources/.
 
 ---
 
@@ -36,7 +36,7 @@ packs.
 
 - **Our guide: Phase 2 Sounds in Order**
   The full Letters & Sounds Phase 2 sequence with pronunciation tips for parents:
-  littlelearners.store/guides/phase-2-sounds-in-order *(publish with guides section)*
+  littlelearners.site/guides/phase-2-sounds-in-order *(publish with guides section)*
 
 ### Early maths
 
@@ -67,9 +67,9 @@ packs.
 
 - **LittleLearners Free Sample Pack**
   A free printable sample — no signup, no email required. Print it tonight:
-  littlelearners.store/#free-sample
+  littlelearners.site/#free-sample
 
 ---
 
-*Know a great free resource we've missed? Email hello@littlelearners.store and
+*Know a great free resource we've missed? Email hello@littlelearners.site and
 we'll take a look. Last updated: September 2026.*

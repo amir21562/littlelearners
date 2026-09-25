@@ -235,7 +235,7 @@ ${rows || '<tr><td colspan="7">No orders yet.</td></tr>'}</table>`));
 const SETTING_FIELDS = [
   ["payoneer_enabled", "Payoneer Checkout enabled (1 = yes)", "0"],
   ["n8n_webhook_url", "n8n sale webhook URL", ""],
-  ["store_email", "Store contact email", "hello@littlelearners.store"],
+  ["store_email", "Store contact email", "hello@littlelearners.site"],
 ];
 // Payoneer secrets are NEVER stored in the DB - they come from environment
 // variables only. The admin UI shows whether each one is set (never the value).
