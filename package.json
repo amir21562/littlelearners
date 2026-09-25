@@ -1,0 +1,1 @@
+{"dependencies":{"express":"^4.19.2","express-session":"^1.19.0","multer":"^2.4.0"},"description":"LittleLearners — UK kids printable worksheets store","main":"server.js","name":"littlelearners-store","scripts":{"start":"node server.js"},"version":"1.0.0"}
