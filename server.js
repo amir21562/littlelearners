@@ -22,6 +22,10 @@ if (fs.existsSync(shipDir)) {
     if (!fs.existsSync(dest)) fs.copyFileSync(path.join(shipDir, f), dest);
   }
 }
+// Self-healing catalogue: every instance inserts any missing catalogue products
+// on boot, so all instances converge even with per-instance SQLite files.
+try { require("./seed").seedDatabase(); }
+catch (e) { console.error("boot seed failed:", e.message); }
 const secretFile = path.join(dataDir, "session-secret");
 let secret;
 if (fs.existsSync(secretFile)) secret = fs.readFileSync(secretFile, "utf8");

@@ -1,5 +1,7 @@
-// Seed the store: copy PDFs + insert 9 products (8 packs + Ultimate Bundle)
-// Run once: node seed.js   (safe to re-run — skips existing slugs)
+// Seed the store: ensure the 9 catalogue products exist (8 packs + Ultimate Bundle).
+// Safe to run on every boot: only inserts slugs that are missing, never overwrites
+// admin edits, and repairs the bundle's item list / page count.
+// Run manually: node seed.js
 const fs = require("fs");
 const path = require("path");
 const { db, DATA } = require("./lib/db");
@@ -7,6 +9,7 @@ const { db, DATA } = require("./lib/db");
 const SRC = path.join(__dirname, "..", "kids-printables", "products");
 const SHIP = path.join(__dirname, "assets", "files"); // PDFs shipped in the repo (production)
 const FILES = path.join(DATA, "files");
+fs.mkdirSync(FILES, { recursive: true });
 
 const PRODUCTS = [
   { slug: "alphabet-tracing-a-z", name: "Alphabet Tracing A–Z", file: "01-alphabet-tracing-a-z.pdf",
@@ -43,37 +46,55 @@ const PRODUCTS = [
     price_minor: 299, compare_price_minor: 499, pages: 7, badge: "", sort: 8 },
 ];
 
-for (const p of PRODUCTS) {
-  const exists = db.prepare("SELECT id FROM products WHERE slug = ?").get(p.slug);
-  const src = path.join(SRC, p.file);
-  const ship = path.join(SHIP, p.file);
-  if (fs.existsSync(src)) fs.copyFileSync(src, path.join(FILES, p.file));
-  else if (fs.existsSync(ship)) fs.copyFileSync(ship, path.join(FILES, p.file));
-  else console.warn("MISSING PDF:", p.file);
-  if (exists) { console.log("skip (exists):", p.slug); continue; }
-  db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
-    pages,pdf_file,cover_image,sample_images,badge,sort)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`).run(
-    p.slug, p.name, p.tagline, p.description, p.price_minor, p.compare_price_minor,
-    p.pages, p.file, `/img/products/${p.slug}.png`, JSON.stringify([`/img/products/${p.slug}.png`]),
-    p.badge, p.sort);
-  console.log("seeded:", p.slug);
+function copyPdf(file) {
+  const dest = path.join(FILES, file);
+  if (fs.existsSync(dest)) return;
+  const src = path.join(SRC, file);
+  const ship = path.join(SHIP, file);
+  if (fs.existsSync(src)) fs.copyFileSync(src, dest);
+  else if (fs.existsSync(ship)) fs.copyFileSync(ship, dest);
+  else console.warn("MISSING PDF:", file);
 }
 
-// Ultimate Bundle = all 8 packs
-const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 ORDER BY sort").all().map((r) => r.id);
-const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0").get().s;
-if (!db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get()) {
-  db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
-    pages,pdf_file,cover_image,sample_images,badge,is_bundle,bundle_items,sort)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(
-    "ultimate-bundle", "Ultimate Early Learners Bundle",
-    "All 8 printable packs — 100 pages. Buy once, print forever.",
-    "Everything in the shop, one price.\nAll 8 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, tricky words, early addition, scissor skills, shapes and colouring.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.",
-    1999, 3499, totalPages, "", "/img/products/ultimate-bundle.png",
-    JSON.stringify(["/img/products/alphabet-tracing-a-z.png", "/img/products/phonics-phase-2.png",
-      "/img/products/mini-colouring-pack.png", "/img/products/simple-addition-1-10.png"]),
-    "BEST VALUE", 1, JSON.stringify(ids), 0);
-  console.log("seeded: ultimate-bundle");
-} else console.log("skip (exists): ultimate-bundle");
-console.log("DONE");
+function seedDatabase() {
+  for (const p of PRODUCTS) {
+    copyPdf(p.file);
+    const exists = db.prepare("SELECT id FROM products WHERE slug = ?").get(p.slug);
+    if (exists) continue;
+    db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
+      pages,pdf_file,cover_image,sample_images,badge,sort)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`).run(
+      p.slug, p.name, p.tagline, p.description, p.price_minor, p.compare_price_minor,
+      p.pages, p.file, `/img/products/${p.slug}.png`, JSON.stringify([`/img/products/${p.slug}.png`]),
+      p.badge, p.sort);
+    console.log("seeded:", p.slug);
+  }
+  // Ultimate Bundle = all 8 packs; repair its item list + page total every run so a
+  // partially-seeded database converges to the full catalogue.
+  const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
+  const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
+  const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
+  if (!bundle) {
+    db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
+      pages,pdf_file,cover_image,sample_images,badge,is_bundle,bundle_items,sort)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(
+      "ultimate-bundle", "Ultimate Early Learners Bundle",
+      "All 8 printable packs — 100 pages. Buy once, print forever.",
+      "Everything in the shop, one price.\nAll 8 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, tricky words, early addition, scissor skills, shapes and colouring.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.",
+      1999, 3499, totalPages, "", "/img/products/ultimate-bundle.png",
+      JSON.stringify(["/img/products/alphabet-tracing-a-z.png", "/img/products/phonics-phase-2.png",
+        "/img/products/mini-colouring-pack.png", "/img/products/simple-addition-1-10.png"]),
+      "BEST VALUE", 1, JSON.stringify(ids), 0);
+    console.log("seeded: ultimate-bundle");
+  } else {
+    db.prepare("UPDATE products SET bundle_items = ?, pages = ? WHERE slug = 'ultimate-bundle'")
+      .run(JSON.stringify(ids), totalPages);
+  }
+}
+
+if (require.main === module) {
+  seedDatabase();
+  console.log("DONE");
+}
+
+module.exports = { seedDatabase };
