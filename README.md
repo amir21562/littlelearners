@@ -31,7 +31,7 @@ See **PAYONEER_SETUP.md** (full guide). Short version:
 ## 4. Publish checklist
 
 - [ ] Domain + Hostinger deploy (same flow as Droply: GitHub repo → hPanel Node.js app)
-- [ ] In `server.js` / HTML: replace `https://littlelearners.store` with your real domain
+- [ ] In `server.js` / HTML: replace `https://littlelearners.site` with your real domain
 - [ ] Payoneer Checkout credentials pasted, `enabled: true`
 - [ ] Success/cancel URLs set in Payoneer dashboard
 - [ ] Production webhook registered: `https://YOURDOMAIN/api/webhook/payoneer`

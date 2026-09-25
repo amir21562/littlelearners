@@ -98,7 +98,7 @@ request — the server already sends it per request, so dashboard config is a
 backup), add:
 
 ```
-https://littlelearners.store/api/webhook/payoneer
+https://littlelearners.site/api/webhook/payoneer
 ```
 
 - Must be **HTTPS**.
@@ -110,8 +110,8 @@ https://littlelearners.store/api/webhook/payoneer
 The customer return URLs are sent per request by the server — no dashboard
 setup needed:
 
-- Success: `https://littlelearners.store/checkout/success?order=<token>`
-- Cancel: `https://littlelearners.store/checkout/cancel`
+- Success: `https://littlelearners.site/checkout/success?order=<token>`
+- Cancel: `https://littlelearners.site/checkout/cancel`
 
 ## Step 5 — Sandbox test, end to end
 

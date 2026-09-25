@@ -5,7 +5,7 @@
 - Hostinger **VPS or plan with Node.js support** (hPanel → Websites → Node.js).
 - **Node.js 22.5+** on the server (`node:sqlite` is built in — no native modules to compile).
   In hPanel, set the Node.js version to **22 or higher** for the app.
-- A domain pointed at the app (e.g. `littlelearners.store`).
+- A domain pointed at the app (e.g. `littlelearners.site`).
 
 ## Steps (hPanel)
 

@@ -16,7 +16,7 @@ const {
 
 const router = express.Router();
 router.use(express.urlencoded({ extended: false })); // contact + account forms
-const SITE = "https://littlelearners.store";
+const SITE = "https://littlelearners.site";
 
 // ---------------- home ----------------
 router.get("/", (req, res) => {
@@ -191,7 +191,7 @@ router.post("/account/signup", (req, res) => res.send(buildAccountNotice(
 router.get("/account/downloads", (req, res) => res.send(buildAccountDownloads(listProducts())));
 router.post("/account/downloads", (req, res) => res.send(buildAccountNotice(
   "Lookup isn't live yet",
-  "Order lookup launches with customer accounts in our next update. For now, your download link is in your receipt email — search your inbox for “LittleLearners”. Still stuck? Email hello@littlelearners.store and we'll resend it.",
+  "Order lookup launches with customer accounts in our next update. For now, your download link is in your receipt email — search your inbox for “LittleLearners”. Still stuck? Email hello@littlelearners.site and we'll resend it.",
   listProducts())));
 
 // ---------------- cart ----------------

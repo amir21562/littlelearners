@@ -2,7 +2,7 @@
 
 > Suggested title: "I Cancelled Our Worksheet Subscription. Here's What We Do Instead."
 > Angle: the buy-once story (brand/personal — do NOT duplicate any of the 12 guides).
-> One natural link to littlelearners.store in the body; author bio links home.
+> One natural link to littlelearners.site in the body; author bio links home.
 > 800–1,200 words. UK English. Active voice.
 
 ---
@@ -66,7 +66,7 @@ ten minutes, and the willingness to print the same page twice.
 If you want to try the buy-once approach, we put together a small shop of
 printable packs for ages 3–6 — everything aligned with the UK early-years
 curriculum, one payment, yours forever. There's a free sample you can print
-tonight with no signup: [littlelearners.store](https://littlelearners.store/).
+tonight with no signup: [littlelearners.site](https://littlelearners.site/).
 
 No subscription. Nothing renews. That's rather the point.
 
