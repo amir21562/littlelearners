@@ -1,4 +1,4 @@
-// Seed the store: ensure the 11 catalogue products exist (10 packs + Ultimate Bundle).
+// Seed the store: ensure the 12 catalogue products exist (11 packs + Ultimate Bundle).
 // Safe to run on every boot: only inserts slugs that are missing, never overwrites
 // admin edits, and repairs the bundle's item list / page count.
 // Run manually: node seed.js
@@ -52,6 +52,10 @@ const PRODUCTS = [
     tagline: "26 new sounds in teaching order — trace, read, blend",
     description: "The natural next step after Phase 2.\nAll 26 Phase 3 graphemes in Letters & Sounds order — j, v, w, x… through to er — each with big traceable letters on UK handwriting lines and a picture word.\nPlus a tricky-words recap page, blending ladders and a Phase 3 completion certificate.\nMatches what UK Reception classes teach after Phase 2.",
     price_minor: 499, compare_price_minor: 799, pages: 16, badge: "NEW", sort: 10 },
+  { slug: "dot-marker-alphabet-numbers", name: "Dot Marker Fun: Alphabet & Numbers", file: "11-dot-marker-alphabet-numbers.pdf",
+    tagline: "14 dab-and-dot pages — made for bingo dabbers",
+    description: "Big hollow bubble letters A–Z and numbers 1–10 to fill with dot markers, plus colour-dabbing and AB pattern pages.\nEach page pairs the bubble letter with a traceable lowercase and a picture word — Apple, Ball, Cat…\nThe mess-free favourite: satisfying dots, zero stray crayon marks. Works with any dot markers or bingo dabbers.",
+    price_minor: 399, compare_price_minor: 599, pages: 14, badge: "NEW", sort: 11 },
 ];
 
 function copyPdf(file) {
@@ -64,6 +68,15 @@ function copyPdf(file) {
   else console.warn("MISSING PDF:", file);
 }
 
+function sampleImages(slug) {
+  return JSON.stringify([
+    `/img/products/${slug}.png`,
+    `/img/products/${slug}-preview-1.webp`,
+    `/img/products/${slug}-preview-2.webp`,
+    `/img/products/${slug}-preview-3.webp`,
+  ]);
+}
+
 function seedDatabase() {
   for (const p of PRODUCTS) {
     copyPdf(p.file);
@@ -73,16 +86,20 @@ function seedDatabase() {
       pages,pdf_file,cover_image,sample_images,badge,sort)
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`).run(
       p.slug, p.name, p.tagline, p.description, p.price_minor, p.compare_price_minor,
-      p.pages, p.file, `/img/products/${p.slug}.png`, JSON.stringify([`/img/products/${p.slug}.png`]),
+      p.pages, p.file, `/img/products/${p.slug}.png`, sampleImages(p.slug),
       p.badge, p.sort);
     console.log("seeded:", p.slug);
   }
-  // Ultimate Bundle = all 10 packs; repair its item list + page total every run so a
+  // Repair sample_images on every run so existing databases pick up new previews.
+  for (const p of PRODUCTS) {
+    db.prepare("UPDATE products SET sample_images = ? WHERE slug = ?").run(sampleImages(p.slug), p.slug);
+  }
+  // Ultimate Bundle = all 11 packs; repair its item list + page total every run so a
   // partially-seeded database converges to the full catalogue.
   const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
   const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
-  const bundleTagline = "All 10 printable packs — 128 pages. Buy once, print forever.";
-  const bundleDesc = "Everything in the shop, one price.\nAll 10 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring and the Halloween fun pack.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
+  const bundleTagline = "All 11 printable packs — 142 pages. Buy once, print forever.";
+  const bundleDesc = "Everything in the shop, one price.\nAll 11 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring, dot marker fun and the Halloween fun pack.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
   const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
   if (!bundle) {
     db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
