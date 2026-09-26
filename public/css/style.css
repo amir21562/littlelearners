@@ -335,3 +335,28 @@ padding:8px 20px;border-radius:999px;margin-bottom:24px;font-size:15px}
 .reslist{list-style:none;padding:0;margin:0 0 10px}
 .reslist li{padding:14px 0;border-bottom:1px solid var(--line)}
 .reslist li:last-child{border-bottom:0}
+
+/* --- quality-overhaul additions --- */
+.usecase{background:#f0f7f4;border:2px solid #cfe6da;border-radius:var(--radius);padding:22px 24px}
+.usecase h2{margin-top:0}
+.instead-line{margin-top:12px;padding-top:12px;border-top:1px dashed #cfe6da}
+.instead-line a{color:var(--teal);font-weight:700}
+.howto-list{margin:6px 0 0;padding-left:0;list-style:none;counter-reset:howto}
+.howto-list li{counter-increment:howto;padding:10px 0 10px 44px;position:relative;border-bottom:1px dashed var(--line);font-size:16px}
+.howto-list li:last-child{border-bottom:0}
+.howto-list li::before{content:counter(howto);position:absolute;left:4px;top:10px;width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.byline a{color:var(--teal);font-weight:600}
+#guides-home{margin-top:34px}
+
+/* --- mobile UI fixes (quality overhaul) --- */
+@media(max-width:760px){
+  .hero{grid-template-columns:1fr;padding:36px 0 24px;gap:24px}
+  .hero h1{font-size:32px}
+  nav.main{gap:14px;overflow-x:auto;white-space:nowrap;padding-bottom:4px;scrollbar-width:none}
+  nav.main::-webkit-scrollbar{display:none}
+  nav.main a{font-size:14px;flex:none}
+  .brand{font-size:19px;flex:none}
+  section{padding:32px 0}
+  section h2{font-size:25px}
+  .btn{padding:13px 26px;font-size:16px}
+}

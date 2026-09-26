@@ -82,7 +82,7 @@ Pillar page: `/guides/school-readiness/`
 
 Baad mein baqi 8, phir naye intents jo Search Console mein nazar aayein.
 
-## Status (updated 2026-09-25)
+## Status (updated 2026-09-26)
 
 - [x] `/guides/` section built (routes `/guides` + `/guides/:slug`, listing page, article template with answer box, TOC, FAQ, JSON-LD)
 - [x] First 4 guides published (A2, A1, B1, D1) — 1,200–1,800 words each, in `lib/guides.js`
@@ -90,7 +90,18 @@ Baad mein baqi 8, phir naye intents jo Search Console mein nazar aayein.
   - A1 `/guides/what-is-phonics-phase-2` → CTA: Phonics Phase 2 pack (+ tricky words pack)
   - B1 `/guides/number-formation-1-to-20` → CTA: Numbers 1–20 pack
   - D1 `/guides/reception-readiness-checklist-uk` → CTA: Ultimate Bundle
+- [x] Remaining 8 guides published 2026-09-26 (1,030–1,440 words each) — all 12 planned guides now live:
+  - A3 `/guides/tricky-words-phases-2-3` → Tricky Words pack
+  - A4 `/guides/phonics-at-home-routine` → Phonics Phase 2 + Alphabet packs
+  - B2 `/guides/simple-addition-ages-4-6` → Simple Addition pack
+  - B3 `/guides/shapes-and-colours-reception` → Shapes & Colours pack
+  - C1 `/guides/pre-writing-skills` → Scissor Skills + Alphabet packs
+  - C2 `/guides/pencil-grip-guide` → Alphabet Tracing pack
+  - C3 `/guides/scissor-skills-progression` → Scissor Skills pack
+  - D2 `/guides/screen-free-learning-routine` → Ultimate Bundle
 - [x] Product pages link back via "Parents also read" (two-way internal linking)
-- [x] Sitemap includes all 4 guides; noindex on checkout/cart/account/404; canonicals consistent (no trailing slash)
-- [ ] Guides publish hone ke baad Search Console mein sitemap submit + 4 guide URLs par "Request indexing" (see `SEO_MONITORING.md`)
-- [ ] Baad mein baqi 8 guides, phir naye intents jo Search Console mein nazar aayein
+- [x] Sitemap includes all 12 guides + /about (31 URLs); noindex on checkout/cart/account/404 and /offer/launch; canonicals consistent (no trailing slash)
+- [x] Guide bylines ("By the LittleLearners team" → /about); new /about page; homepage "Free parent guides" section
+- [x] Product pages de-templated: unique "Is this the right pack?" + "How to use at home" sections per product
+- [ ] Guides publish hone ke baad Search Console mein sitemap resubmit (31 URLs)
+- [ ] Naye intents jo Search Console mein nazar aayein, un par naye guides
