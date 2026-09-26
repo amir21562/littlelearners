@@ -1,4 +1,4 @@
-// Seed the store: ensure the 12 catalogue products exist (11 packs + Ultimate Bundle).
+// Seed the store: ensure the 13 catalogue products exist (12 packs + Ultimate Bundle).
 // Safe to run on every boot: only inserts slugs that are missing, never overwrites
 // admin edits, and repairs the bundle's item list / page count.
 // Run manually: node seed.js
@@ -56,6 +56,10 @@ const PRODUCTS = [
     tagline: "14 dab-and-dot pages — made for bingo dabbers",
     description: "Big hollow bubble letters A–Z and numbers 1–10 to fill with dot markers, plus colour-dabbing and AB pattern pages.\nEach page pairs the bubble letter with a traceable lowercase and a picture word — Apple, Ball, Cat…\nThe mess-free favourite: satisfying dots, zero stray crayon marks. Works with any dot markers or bingo dabbers.",
     price_minor: 399, compare_price_minor: 599, pages: 14, badge: "NEW", sort: 11 },
+  { slug: "christmas-fun-pack", name: "Christmas Fun Pack", file: "12-christmas-fun-pack.pdf",
+    tagline: "12 festive pages: tracing, counting, mazes & crafts",
+    description: "A Christmas tree to trace and decorate, bauble colouring, count-the-presents to 10, Christmas I-spy, a reindeer maze and spot-the-difference.\nPlus word tracing (santa, star, gift), a decorate-the-stocking page, snowflake colouring and a guided letter to Santa.\nReal early-learning skills wrapped in December magic — perfect for the last weeks of term.",
+    price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 12 },
 ];
 
 function copyPdf(file) {
@@ -94,12 +98,12 @@ function seedDatabase() {
   for (const p of PRODUCTS) {
     db.prepare("UPDATE products SET sample_images = ? WHERE slug = ?").run(sampleImages(p.slug), p.slug);
   }
-  // Ultimate Bundle = all 11 packs; repair its item list + page total every run so a
+  // Ultimate Bundle = all 12 packs; repair its item list + page total every run so a
   // partially-seeded database converges to the full catalogue.
   const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
   const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
-  const bundleTagline = "All 11 printable packs — 142 pages. Buy once, print forever.";
-  const bundleDesc = "Everything in the shop, one price.\nAll 11 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring, dot marker fun and the Halloween fun pack.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
+  const bundleTagline = "All 12 printable packs — 154 pages. Buy once, print forever.";
+  const bundleDesc = "Everything in the shop, one price.\nAll 12 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring, dot marker fun, Halloween and Christmas fun packs.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
   const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
   if (!bundle) {
     db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
