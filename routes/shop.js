@@ -6,7 +6,7 @@ const fs = require("fs");
 const { db, DATA, getSetting, getProductBySlug, getProductById, listProducts, orderFiles } = require("../lib/db");
 const { guideBySlug, GUIDES } = require("../lib/guides");
 const { buildHome, buildShop, buildProduct, buildSuccess, buildCancel, buildOrderDownloads,
-  buildGuides, buildGuide, buildResources, buildLegal, buildContact, buildContactThanks,
+  buildGuides, buildGuide, buildResources, buildAbout, buildLegal, buildContact, buildContactThanks,
   buildAccountLogin, buildAccountSignup, buildAccountDownloads, buildAccountNotice,
   buildCart, buildOffer, build404 } = require("../lib/pages");
 const {
@@ -155,6 +155,11 @@ router.get("/guides/:slug", (req, res) => {
   res.send(buildGuide(g, listProducts()));
 });
 
+// ---------------- about ----------------
+router.get("/about", (req, res) => {
+  res.send(buildAbout(listProducts()));
+});
+
 // ---------------- resources ----------------
 router.get("/resources", (req, res) => {
   res.send(buildResources(listProducts()));
@@ -217,7 +222,7 @@ router.get("/sitemap.xml", (req, res) => {
   const guideUrls = GUIDES.filter((g) => !g.draft).map((g) => `/guides/${g.slug}`);
   const urls = ["/", "/shop", "/guides",
     ...guideUrls,
-    "/privacy", "/terms", "/refunds", "/licence", "/contact", "/resources",
+    "/privacy", "/terms", "/refunds", "/licence", "/contact", "/resources", "/about",
     ...listProducts().map((p) => `/product/${p.slug}`)];
   res.type("application/xml").send(`<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
