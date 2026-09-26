@@ -1,4 +1,4 @@
-// Seed the store: ensure the 9 catalogue products exist (8 packs + Ultimate Bundle).
+// Seed the store: ensure the 10 catalogue products exist (9 packs + Ultimate Bundle).
 // Safe to run on every boot: only inserts slugs that are missing, never overwrites
 // admin edits, and repairs the bundle's item list / page count.
 // Run manually: node seed.js
@@ -44,6 +44,10 @@ const PRODUCTS = [
     tagline: "6 sweet colouring pages with bold, easy outlines",
     description: "A cute cat, a happy dog, a sun with a rainbow, a little fish — plus a rainbow and a bunch of balloons to colour.\nBold outlines are perfect for little hands.\nGreat for quiet time, travel and rainy days.",
     price_minor: 299, compare_price_minor: 499, pages: 7, badge: "", sort: 8 },
+  { slug: "halloween-fun-pack", name: "Halloween Fun Pack", file: "09-halloween-fun-pack.pdf",
+    tagline: "12 spooky-fun pages: tracing, counting, mazes & colouring",
+    description: "Pumpkin tracing, a friendly ghost to colour, count-the-bats to 10, an easy Halloween maze, a spider-web tracing page and a masquerade mask.\nPlus Halloween I-spy, spot-the-difference, candy-corn counting and word tracing (pumpkin, ghost, witch) on UK handwriting lines.\nReal early-learning skills disguised as October fun — perfect for half-term.",
+    price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 9 },
 ];
 
 function copyPdf(file) {
@@ -69,26 +73,28 @@ function seedDatabase() {
       p.badge, p.sort);
     console.log("seeded:", p.slug);
   }
-  // Ultimate Bundle = all 8 packs; repair its item list + page total every run so a
+  // Ultimate Bundle = all 9 packs; repair its item list + page total every run so a
   // partially-seeded database converges to the full catalogue.
   const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
   const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
+  const bundleTagline = "All 9 printable packs — 112 pages. Buy once, print forever.";
+  const bundleDesc = "Everything in the shop, one price.\nAll 9 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, tricky words, early addition, scissor skills, shapes, colouring and the Halloween fun pack.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
   const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
   if (!bundle) {
     db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
       pages,pdf_file,cover_image,sample_images,badge,is_bundle,bundle_items,sort)
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(
       "ultimate-bundle", "Ultimate Early Learners Bundle",
-      "All 8 printable packs — 100 pages. Buy once, print forever.",
-      "Everything in the shop, one price.\nAll 8 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, tricky words, early addition, scissor skills, shapes and colouring.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.",
+      bundleTagline,
+      bundleDesc,
       1999, 3499, totalPages, "", "/img/products/ultimate-bundle.png",
       JSON.stringify(["/img/products/alphabet-tracing-a-z.png", "/img/products/phonics-phase-2.png",
         "/img/products/mini-colouring-pack.png", "/img/products/simple-addition-1-10.png"]),
       "BEST VALUE", 1, JSON.stringify(ids), 0);
     console.log("seeded: ultimate-bundle");
   } else {
-    db.prepare("UPDATE products SET bundle_items = ?, pages = ? WHERE slug = 'ultimate-bundle'")
-      .run(JSON.stringify(ids), totalPages);
+    db.prepare("UPDATE products SET bundle_items = ?, pages = ?, tagline = ?, description = ? WHERE slug = 'ultimate-bundle'")
+      .run(JSON.stringify(ids), totalPages, bundleTagline, bundleDesc);
   }
 }
 
