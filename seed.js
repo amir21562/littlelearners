@@ -1,4 +1,4 @@
-// Seed the store: ensure the 10 catalogue products exist (9 packs + Ultimate Bundle).
+// Seed the store: ensure the 11 catalogue products exist (10 packs + Ultimate Bundle).
 // Safe to run on every boot: only inserts slugs that are missing, never overwrites
 // admin edits, and repairs the bundle's item list / page count.
 // Run manually: node seed.js
@@ -48,6 +48,10 @@ const PRODUCTS = [
     tagline: "12 spooky-fun pages: tracing, counting, mazes & colouring",
     description: "Pumpkin tracing, a friendly ghost to colour, count-the-bats to 10, an easy Halloween maze, a spider-web tracing page and a masquerade mask.\nPlus Halloween I-spy, spot-the-difference, candy-corn counting and word tracing (pumpkin, ghost, witch) on UK handwriting lines.\nReal early-learning skills disguised as October fun — perfect for half-term.",
     price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 9 },
+  { slug: "phonics-phase-3", name: "Phonics Phase 3 (Letters & Sounds)", file: "10-phonics-phase-3.pdf",
+    tagline: "26 new sounds in teaching order — trace, read, blend",
+    description: "The natural next step after Phase 2.\nAll 26 Phase 3 graphemes in Letters & Sounds order — j, v, w, x… through to er — each with big traceable letters on UK handwriting lines and a picture word.\nPlus a tricky-words recap page, blending ladders and a Phase 3 completion certificate.\nMatches what UK Reception classes teach after Phase 2.",
+    price_minor: 499, compare_price_minor: 799, pages: 16, badge: "NEW", sort: 10 },
 ];
 
 function copyPdf(file) {
@@ -73,12 +77,12 @@ function seedDatabase() {
       p.badge, p.sort);
     console.log("seeded:", p.slug);
   }
-  // Ultimate Bundle = all 9 packs; repair its item list + page total every run so a
+  // Ultimate Bundle = all 10 packs; repair its item list + page total every run so a
   // partially-seeded database converges to the full catalogue.
   const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
   const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
-  const bundleTagline = "All 9 printable packs — 112 pages. Buy once, print forever.";
-  const bundleDesc = "Everything in the shop, one price.\nAll 9 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, tricky words, early addition, scissor skills, shapes, colouring and the Halloween fun pack.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
+  const bundleTagline = "All 10 printable packs — 128 pages. Buy once, print forever.";
+  const bundleDesc = "Everything in the shop, one price.\nAll 10 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring and the Halloween fun pack.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
   const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
   if (!bundle) {
     db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
