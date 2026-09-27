@@ -68,6 +68,10 @@ const PRODUCTS = [
     tagline: "10 pixel-art pictures: match numbers 1–10 to colours",
     description: "Ten colour-by-number pictures — fish, flower, butterfly, rocket, rainbow and more — each split into numbered squares with a colour key.\nChildren match each number to its colour, building number recognition to 10, colour vocabulary and careful concentration.\nA satisfying finish every time: the picture appears like magic as they colour.",
     price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 14 },
+  { slug: "nursery-rhymes-pack", name: "Nursery Rhymes Pack", file: "15-nursery-rhymes-pack.pdf",
+    tagline: "10 classic rhymes to colour, with first words to trace",
+    description: "Ten beloved nursery rhymes — Twinkle Twinkle, Baa Baa Black Sheep, Humpty Dumpty, Incy Wincy Spider and more.\nEach rhyme comes with a colouring illustration and first words to trace in grey, building early language, rhythm and pencil control together.\nSing it, colour it, trace it — the three-step routine little learners love.",
+    price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 15 },
 ];
 
 function copyPdf(file) {
@@ -110,7 +114,7 @@ function seedDatabase() {
   // partially-seeded database converges to the full catalogue.
   const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
   const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
-  const bundleTagline = "All 14 printable packs — 178 pages. Buy once, print forever.";
+  const bundleTagline = "All 15 printable packs — 190 pages. Buy once, print forever.";
   const bundleDesc = "Everything in the shop, one price.\nAll 12 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring, dot marker fun, Halloween and Christmas fun packs.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
   const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
   if (!bundle) {
