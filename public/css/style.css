@@ -221,6 +221,19 @@ font-size:13.5px;font-weight:700;color:var(--navy);text-decoration:none}
 /* cards meta line + green sale */
 .pcard .pmeta-line{font-size:12.5px;color:var(--muted);font-weight:600;margin:2px 0 6px}
 .pcard .ppreview{font-size:12.5px;color:var(--teal);font-weight:700;margin:6px 0 2px}
+/* Sample-page slider */
+.pslider{position:relative;max-width:520px;margin:0 auto}
+.ptrack{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border:2px solid var(--line);border-radius:var(--radius);scrollbar-width:none;background:#fff}
+.ptrack::-webkit-scrollbar{display:none}
+.pslide{flex:0 0 100%;scroll-snap-align:center;user-select:none}
+.pslide img{width:100%;height:auto;display:block;pointer-events:none}
+.pnav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(13,148,136,.92);color:#fff;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.pnav.prev{left:10px}.pnav.next{right:10px}
+.pnav:hover{background:var(--teal-dark)}
+.pdots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.pdot{width:10px;height:10px;border-radius:50%;border:none;background:#cbd5e1;cursor:pointer;padding:0}
+.pdot.on{background:var(--teal)}
+.pwmnote{text-align:center;font-size:12.5px;color:var(--muted);margin-top:10px}
 .pprice strong.sale{color:#15803d}
 
 @media(max-width:960px){
