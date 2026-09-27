@@ -70,7 +70,6 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:
   .hero h1{font-size:32px}
   .grid4{grid-template-columns:repeat(2,1fr)}
   .grid3,.steps{grid-template-columns:1fr}
-  nav.main{display:none}
 }
 
 /* ---- shop cards ---- */
@@ -268,7 +267,11 @@ font-size:13.5px;font-weight:700;color:var(--navy);text-decoration:none}
   .secnav{top:0;overflow-x:auto;white-space:nowrap}
 }
 @media(max-width:600px){
-  footer.site .fcols{grid-template-columns:1fr}
+  footer.site .fcols{grid-template-columns:1fr;text-align:center}
+  footer.site .fcol{margin:0 auto}
+  .grid4{grid-template-columns:1fr}
+  .pcard,.guide-card{text-align:center}
+  .pcard img{max-width:420px;margin:0 auto}
 }
 @media(max-width:860px){.statgrid,.frow{grid-template-columns:1fr}}
 
@@ -389,7 +392,7 @@ padding:8px 20px;border-radius:999px;margin-bottom:24px;font-size:15px}
 @media(max-width:760px){
   .hero{grid-template-columns:1fr;padding:36px 0 24px;gap:24px}
   .hero h1{font-size:32px}
-  nav.main{gap:14px;overflow-x:auto;white-space:nowrap;padding-bottom:4px;scrollbar-width:none}
+  nav.main{display:flex;gap:14px;overflow-x:auto;white-space:nowrap;padding-bottom:4px;scrollbar-width:none;margin-left:auto}
   nav.main::-webkit-scrollbar{display:none}
   nav.main a{font-size:14px;flex:none}
   .brand{font-size:19px;flex:none}
