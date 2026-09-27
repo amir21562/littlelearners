@@ -60,6 +60,10 @@ const PRODUCTS = [
     tagline: "12 festive pages: tracing, counting, mazes & crafts",
     description: "A Christmas tree to trace and decorate, bauble colouring, count-the-presents to 10, Christmas I-spy, a reindeer maze and spot-the-difference.\nPlus word tracing (santa, star, gift), a decorate-the-stocking page, snowflake colouring and a guided letter to Santa.\nReal early-learning skills wrapped in December magic — perfect for the last weeks of term.",
     price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 12 },
+  { slug: "first-mazes-pack", name: "My First Mazes", file: "13-first-mazes-pack.pdf",
+    tagline: "10 progressive mazes: follow-the-path to tricky 8×8",
+    description: "Ten mazes that grow with your child — starting with simple follow-the-path pages for little hands, building up to proper 8×8 mazes with dead ends.\nEvery maze is a mini story: help the bee find the flower, the bunny find the carrot, the rocket reach the planet.\nMazes build pencil control, concentration and problem-solving — plus a Maze Champion certificate at the end.",
+    price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 13 },
 ];
 
 function copyPdf(file) {
@@ -102,7 +106,7 @@ function seedDatabase() {
   // partially-seeded database converges to the full catalogue.
   const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
   const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
-  const bundleTagline = "All 12 printable packs — 154 pages. Buy once, print forever.";
+  const bundleTagline = "All 13 printable packs — 166 pages. Buy once, print forever.";
   const bundleDesc = "Everything in the shop, one price.\nAll 12 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring, dot marker fun, Halloween and Christmas fun packs.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
   const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
   if (!bundle) {
