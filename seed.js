@@ -72,6 +72,10 @@ const PRODUCTS = [
     tagline: "10 classic rhymes to colour, with first words to trace",
     description: "Ten beloved nursery rhymes — Twinkle Twinkle, Baa Baa Black Sheep, Humpty Dumpty, Incy Wincy Spider and more.\nEach rhyme comes with a colouring illustration and first words to trace in grey, building early language, rhythm and pencil control together.\nSing it, colour it, trace it — the three-step routine little learners love.",
     price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 15 },
+  { slug: "cvc-word-families", name: "CVC Word Families", file: "16-cvc-word-families.pdf",
+    tagline: "Read, build & spell CVC words: short vowels a to u",
+    description: "Ten activity pages across all five short vowels — read and trace cat, pen, pig, dog, sun and friends.\nMissing-vowel puzzles, circle-the-word listening games, unscrambling and word matching build blending and segmenting together.\nThe essential bridge from letter sounds to real reading — plus a CVC Word Star certificate.",
+    price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 16 },
 ];
 
 function copyPdf(file) {
@@ -114,8 +118,8 @@ function seedDatabase() {
   // partially-seeded database converges to the full catalogue.
   const ids = db.prepare("SELECT id FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle' ORDER BY sort").all().map((r) => r.id);
   const totalPages = db.prepare("SELECT COALESCE(SUM(pages),0) s FROM products WHERE is_bundle = 0 AND slug != 'ultimate-bundle'").get().s;
-  const bundleTagline = "All 15 printable packs — 190 pages. Buy once, print forever.";
-  const bundleDesc = "Everything in the shop, one price.\nAll 12 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring, dot marker fun, Halloween and Christmas fun packs.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
+  const bundleTagline = "All 16 printable packs — 202 pages. Buy once, print forever.";
+  const bundleDesc = "Everything in the shop, one price.\nAll 16 printable packs: alphabet tracing, numbers to 20, Phase 2 phonics, Phase 3 phonics, tricky words, early addition, scissor skills, shapes, colouring, dot marker fun, Halloween, Christmas, first mazes, colour by number, nursery rhymes and CVC word families.\nThe complete EYFS & KS1 home-learning kit for ages 3–6 — cheaper than two months of a worksheet subscription.";
   const bundle = db.prepare("SELECT id FROM products WHERE slug = 'ultimate-bundle'").get();
   if (!bundle) {
     db.prepare(`INSERT INTO products (slug,name,tagline,description,price_minor,compare_price_minor,
