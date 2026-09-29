@@ -76,6 +76,10 @@ const PRODUCTS = [
     tagline: "Read, build & spell CVC words: short vowels a to u",
     description: "Ten activity pages across all five short vowels — read and trace cat, pen, pig, dog, sun and friends.\nMissing-vowel puzzles, circle-the-word listening games, unscrambling and word matching build blending and segmenting together.\nThe essential bridge from letter sounds to real reading — plus a CVC Word Star certificate.",
     price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 16 },
+  { slug: "telling-the-time-pack", name: "Telling the Time Pack", file: "17-telling-the-time.pdf",
+    tagline: "O'clock & half past: read the clock, draw the hands",
+    description: "Eleven activity pages that follow the Year 1 classroom order \u2014 meet the clock, read o'clock, draw o'clock, then the same for half past.\\nMatching games, a my-day-in-times routine page, time pairs and a draw-your-day page make the two hands stick.\\nThe telling-time breakthrough, one gentle page at a time \u2014 plus a Time Star certificate.",
+    price_minor: 399, compare_price_minor: 599, pages: 12, badge: "NEW", sort: 17 },
 ];
 
 function copyPdf(file) {
